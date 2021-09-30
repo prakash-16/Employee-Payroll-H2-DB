@@ -1,5 +1,6 @@
 package com.bridgelabz.employeepayrollh2db.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,34 +13,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.employeepayrollh2db.models.EmployeePayrollDTO;
+import com.bridgelabz.employeepayrollh2db.models.Response;
+import com.bridgelabz.employeepayrollh2db.service.IEmployeePayrollService;
 
 @RestController
 @RequestMapping("/employee/payroll")
 class EmployeePayrollController {
+	@Autowired
+	IEmployeePayrollService empServ;
 
 	@RequestMapping(value = { "/", "/get/all" })
-	public ResponseEntity<String> getAllData() {
-		return new ResponseEntity<String>("Get call Succues", HttpStatus.OK);
+	public ResponseEntity<Response> getAllData() {
+		Response res = new Response("Get call Success", empServ.getDataAllEmployee());
+		return new ResponseEntity<Response>(res, HttpStatus.OK);
 	}
 
 	@GetMapping("/get/{id}")
-	public ResponseEntity<String> getDataById(@PathVariable int id) {
-		System.out.println(id);
-		return new ResponseEntity<String>("Get Id call Success", HttpStatus.OK);
+	public ResponseEntity<Response> getDataById(@PathVariable int id) {
+		Response res = new Response("Get call id Success", empServ.getDataById(id));
+		return new ResponseEntity<Response>(res, HttpStatus.OK);
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<String> addEmpData(@RequestBody EmployeePayrollDTO empPayDTO) {
-		return new ResponseEntity<String>("Create employee payroll data success", HttpStatus.OK);
+	public ResponseEntity<Response> addEmpData(@RequestBody EmployeePayrollDTO empPayDTO) {
+		Response res = new Response("Create employee payroll data success", empServ.createData(empPayDTO));
+		return new ResponseEntity<Response>(res, HttpStatus.OK);
 	}
 
 	@PutMapping("/update/{id}")
-	public ResponseEntity<String> updateEmpData(@PathVariable(value="id")  int id, @RequestBody EmployeePayrollDTO empPayDTO) {
-		return new ResponseEntity<String>("Updated employee payroll data success", HttpStatus.OK);
+	public ResponseEntity<Response> updateEmpData(@PathVariable(value = "id") int id,
+			@RequestBody EmployeePayrollDTO empPayDTO) {
+		Response res = new Response("Updated employee payroll data success", empServ.updateDetails(id, empPayDTO));
+		return new ResponseEntity<Response>(res, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<String> deleteEmpData(@RequestBody EmployeePayrollDTO empPayDTO) {
+	public ResponseEntity<String> deleteEmpData(@PathVariable int id) {
 		return new ResponseEntity<String>("Deleted call success", HttpStatus.OK);
 	}
 }

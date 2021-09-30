@@ -2,9 +2,9 @@ package com.bridgelabz.employeepayrollh2db.models;
 
 public class EmployeePayrollDTO {
 	private String name;
-	private double salary;
+	private long salary;
 	
-	public EmployeePayrollDTO(String name, double salary) {
+	public EmployeePayrollDTO(String name, long salary) {
 		super();
 		this.name = name;
 		this.salary = salary;
@@ -22,7 +22,7 @@ public class EmployeePayrollDTO {
 		return salary;
 	}
 
-	public void setSalary(double salary) {
+	public void setSalary(long salary) {
 		this.salary = salary;
 	}
 
