@@ -16,7 +16,7 @@ public class EmployeePayrollDetails {
 	public String profilePic;
 	public List<String> department;
 
-	public EmployeePayrollDetails(int id,String name, EmployeePayrollDTO emp) {
+	public EmployeePayrollDetails(int id, EmployeePayrollDTO emp) {
 		super();
 		this.id = id;
 		this.name = emp.name;
