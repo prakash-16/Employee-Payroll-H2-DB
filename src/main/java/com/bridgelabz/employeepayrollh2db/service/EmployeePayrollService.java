@@ -32,4 +32,13 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 		payrollList.add(id-1, empData);
 		return empData;
 	}
+	
+	public boolean deleteDetails(int id) {
+		if(payrollList.remove(id-1) != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

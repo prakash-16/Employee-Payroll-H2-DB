@@ -1,5 +1,7 @@
 package com.bridgelabz.employeepayrollh2db.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,13 +37,13 @@ class EmployeePayrollController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<Response> addEmpData(@RequestBody EmployeePayrollDTO empPayDTO) {
+	public ResponseEntity<Response> addEmpData(@Valid @RequestBody EmployeePayrollDTO empPayDTO) {
 		Response res = new Response("Create employee payroll data success", empServ.createData(empPayDTO));
 		return new ResponseEntity<Response>(res, HttpStatus.OK);
 	}
 
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Response> updateEmpData(@PathVariable(value = "id") int id,
+	public ResponseEntity<Response> updateEmpData(@Valid @PathVariable(value = "id") int id,
 			@RequestBody EmployeePayrollDTO empPayDTO) {
 		Response res = new Response("Updated employee payroll data success", empServ.updateDetails(id, empPayDTO));
 		return new ResponseEntity<Response>(res, HttpStatus.OK);
@@ -49,6 +51,7 @@ class EmployeePayrollController {
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteEmpData(@PathVariable int id) {
+		Response res = new Response("Details deleted successfully", empServ.deleteDetails(id));
 		return new ResponseEntity<String>("Deleted call success", HttpStatus.OK);
 	}
 }
