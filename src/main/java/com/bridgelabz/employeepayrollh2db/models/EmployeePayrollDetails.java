@@ -1,5 +1,6 @@
 package com.bridgelabz.employeepayrollh2db.models;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Data;
@@ -10,7 +11,7 @@ public class EmployeePayrollDetails {
 	private String name;
 	private long salary;
 	private String gender;
-	public String start;
+	public LocalDate start;
 	public String note;
 	public String profilePic;
 	public List<String> department;
