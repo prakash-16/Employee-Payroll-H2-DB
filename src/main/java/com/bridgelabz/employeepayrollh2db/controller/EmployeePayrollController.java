@@ -54,4 +54,10 @@ class EmployeePayrollController {
 		Response res = new Response("Details deleted successfully", empServ.deleteDetails(id));
 		return new ResponseEntity<String>("Deleted call success", HttpStatus.OK);
 	}
+	
+	@GetMapping("/department/{department}")
+	public ResponseEntity<Response> getEmployeeFromDept(@PathVariable String deptartment){
+		Response res = new Response("Updated employee payroll data success", empServ.getDepartment(deptartment));
+		return new ResponseEntity<Response>(res, HttpStatus.OK);
+	}
 }

@@ -21,33 +21,38 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 	@Autowired
 	private EmployeePayrollRepository payrollList;
 
-	public List<EmployeePayrollDetails> getDataAllEmployee() {
+	public List<EmployeePayrollData> getDataAllEmployee() {
 		return payrollList.findAll();
 	}
 
-	public EmployeePayrollDetails getDataById(int id) {
+	public EmployeePayrollData getDataById(int id) {
 		return payrollList.findById(id).orElseThrow(() -> new EmployeePayrollException("id not found"));
 	}
 
-	public EmployeePayrollDetails createData(EmployeePayrollDTO empPayDTO) {
-		EmployeePayrollDetails empData = new EmployeePayrollDetails(0, empPayDTO);
+	public EmployeePayrollData createData(EmployeePayrollDTO empPayDTO) {
+		EmployeePayrollData empData = new EmployeePayrollData(empPayDTO);
 		EmployeePayrollData emp = new EmployeePayrollData(empPayDTO);
 		log.debug(empData.toString());
 		return payrollList.save(empData);
 	}
 
-	public EmployeePayrollDetails updateDetails(int id, EmployeePayrollDTO empPayDTO) {
-		EmployeePayrollDetails empData = this.getDataById(id);
+	public EmployeePayrollData updateDetails(int id, EmployeePayrollDTO empPayDTO) {
+		EmployeePayrollData empData = this.getDataById(id);
 		EmployeePayrollData emp = new EmployeePayrollData(empPayDTO);
 		return payrollList.save(empData);
 	}
 
 	public boolean deleteDetails(int id) {
 		if(payrollList.findById(id) != null) {
-			EmployeePayrollDetails empData = this.getDataById(id);
+			EmployeePayrollData empData = this.getDataById(id);
 			payrollList.delete(empData);
 			return true;
 		}
 		return false;
+	}
+	
+	public EmployeePayrollData getDepartment(String dept) {
+		EmployeePayrollData empData = this.getDepartment(dept);
+		return payrollList.save(empData);
 	}
 }

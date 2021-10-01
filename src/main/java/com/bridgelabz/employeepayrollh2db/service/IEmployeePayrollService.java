@@ -3,18 +3,21 @@ package com.bridgelabz.employeepayrollh2db.service;
 import java.util.List;
 
 import com.bridgelabz.employeepayrollh2db.models.EmployeePayrollDTO;
+import com.bridgelabz.employeepayrollh2db.models.EmployeePayrollData;
 import com.bridgelabz.employeepayrollh2db.models.EmployeePayrollDetails;
 
 public interface IEmployeePayrollService {
 
-	List<EmployeePayrollDetails> getDataAllEmployee();
+	List<EmployeePayrollData> getDataAllEmployee();
 
-	EmployeePayrollDetails getDataById(int id);
+	EmployeePayrollData getDataById(int id);
 
-	EmployeePayrollDetails createData(EmployeePayrollDTO empPayDTO);
+	EmployeePayrollData createData(EmployeePayrollDTO empPayDTO);
 
-	EmployeePayrollDetails updateDetails(int id, EmployeePayrollDTO empPayDTO);
+	EmployeePayrollData updateDetails(int id, EmployeePayrollDTO empPayDTO);
 
 	boolean deleteDetails(int id);
+	
+	EmployeePayrollData getDepartment(String dept);
 
 }
