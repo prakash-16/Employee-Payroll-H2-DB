@@ -18,9 +18,9 @@ public @Data class EmployeePayrollData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "emp_id")
-	private String name;
-	private long salary;
-	private String gender;
+	public String name;
+	public long salary;
+	public String gender;
 	public LocalDate start;
 	public String note;
 	public String profilePic;
@@ -30,7 +30,7 @@ public @Data class EmployeePayrollData {
 		this.updateEmployeePayrollData(emp);
 	}
 
-	private void updateEmployeePayrollData(EmployeePayrollDTO emp) {
+	public void updateEmployeePayrollData(EmployeePayrollDTO emp) {
 		this.name = emp.name;
 		this.salary = emp.salary;
 		this.gender = emp.gender;
